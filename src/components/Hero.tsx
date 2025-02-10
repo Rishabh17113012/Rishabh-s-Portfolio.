@@ -1,6 +1,5 @@
-
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, LinkedinIcon, Mail, InstagramIcon } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -60,18 +59,26 @@ const Hero = () => {
               <Github className="w-6 h-6" />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/rishabh-dev-mani-tripathi-92a8b724a/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-500 hover:text-gray-900 transition-colors"
             >
-              <Linkedin className="w-6 h-6" />
+              <LinkedinIcon className="w-6 h-6" />
             </a>
             <a
-              href="mailto:your.email@example.com"
+              href="mailto:workwebdevtripathi736@gmail.com"
               className="text-gray-500 hover:text-gray-900 transition-colors"
             >
               <Mail className="w-6 h-6" />
+            </a>
+            <a
+              href="https://www.instagram.com/rishabhtripathiii_?igsh=YnNxdmF1Z3VveTFs"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-500 hover:text-gray-900 transition-colors"
+            >
+              <InstagramIcon className="w-6 h-6" />
             </a>
           </motion.div>
 

@@ -1,8 +1,7 @@
-
 import { useState, FormEvent } from "react";
 import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Linkedin, Github } from "lucide-react";
+import { Mail, Phone, MapPin, LinkedinIcon, GithubIcon, Instagram } from "lucide-react";
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -14,14 +13,14 @@ const Contact = () => {
 
     try {
       await emailjs.sendForm(
-        'YOUR_SERVICE_ID',
-        'YOUR_TEMPLATE_ID',
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         e.currentTarget,
-        'YOUR_PUBLIC_KEY'
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
       setSubmitted(true);
     } catch (error) {
-      console.error('Error sending email:', error);
+      console.error("Error sending email:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -37,7 +36,9 @@ const Contact = () => {
           viewport={{ once: true }}
           className="text-center"
         >
-          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Get in Touch</h2>
+          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+            Get in Touch
+          </h2>
           <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
             Have a question or want to work together?
           </p>
@@ -55,32 +56,59 @@ const Contact = () => {
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-purple-600" />
-                <a href="mailto:your.email@example.com" className="text-gray-600 hover:text-purple-600">
-                  your.email@example.com
+                <a
+                  href="mailto:workwebdevtripathi736@gmail.com"
+                  className="text-gray-600 hover:text-purple-600"
+                >
+                  workwebdevtripathi736@gmail.com
                 </a>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-purple-600" />
-                <a href="tel:+1234567890" className="text-gray-600 hover:text-purple-600">
-                  +1 (234) 567-890
+                <a
+                  href="tel:+91 9559440334"
+                  className="text-gray-600 hover:text-purple-600"
+                >
+                  +91 9559440334
                 </a>
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin className="w-5 h-5 text-purple-600" />
-                <span className="text-gray-600">
-                  Gorakhpur, Uttar Pradesh
-                </span>
+                <span className="text-gray-600">Pune, Maharashtra</span>
               </div>
               <div className="flex items-center space-x-3">
-                <Linkedin className="w-5 h-5 text-purple-600" />
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-purple-600">
+                <LinkedinIcon className="w-5 h-5 text-purple-600" />
+                <a
+                  href="https://www.linkedin.com/in/rishabh-dev-mani-tripathi-92a8b724a/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 hover:text-purple-600"
+                >
                   LinkedIn Profile
                 </a>
               </div>
+
               <div className="flex items-center space-x-3">
-                <Github className="w-5 h-5 text-purple-600" />
-                <a href="https://github.com/Rishabh17113012" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-purple-600">
+                <GithubIcon className="w-5 h-5 text-purple-600" />
+                <a
+                  href="https://github.com/Rishabh17113012"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 hover:text-purple-600"
+                >
                   GitHub Profile
+                </a>
+              </div>
+
+              <div className="flex items-center space-x-3">
+                <Instagram className="w-5 h-5 text-purple-600" />
+                <a
+                  href="https://www.instagram.com/rishabhtripathiii_?igsh=YnNxdmF1Z3VveTFs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 hover:text-purple-600"
+                >
+                  Instagram Profile
                 </a>
               </div>
             </div>
@@ -95,13 +123,23 @@ const Contact = () => {
             {submitted ? (
               <div className="text-center p-8 bg-white rounded-lg shadow-lg">
                 <Mail className="mx-auto h-12 w-12 text-purple-600" />
-                <h3 className="mt-4 text-xl font-medium text-gray-900">Thank you for your message!</h3>
-                <p className="mt-2 text-gray-500">I'll get back to you as soon as possible.</p>
+                <h3 className="mt-4 text-xl font-medium text-gray-900">
+                  Thank you for your message!
+                </h3>
+                <p className="mt-2 text-gray-500">
+                  I'll get back to you as soon as possible.
+                </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-lg p-8 space-y-6">
+              <form
+                onSubmit={handleSubmit}
+                className="bg-white rounded-lg shadow-lg p-8 space-y-6"
+              >
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     Name
                   </label>
                   <input
@@ -113,7 +151,10 @@ const Contact = () => {
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     Email
                   </label>
                   <input
@@ -125,7 +166,10 @@ const Contact = () => {
                   />
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     Message
                   </label>
                   <textarea

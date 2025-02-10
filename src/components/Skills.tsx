@@ -2,9 +2,9 @@
 import { motion } from "framer-motion";
 
 const skills = [
-  { category: "Programming Languages", items: ["HTML", "CSS", "JavaScript", "SQL", "C++", "Python", "C"] },
+  { category: "Programming Languages", items: ["HTML", "CSS", "JavaScript","TypeScript", "SQL", "C++", "Python", "C"] },
   { category: "Developer Tools", items: ["VS Code", "WEKA", "Chrome DevTools", "Jupyter Notebook"] },
-  { category: "Technologies/Frameworks", items: ["GitHub", "React", "Node.js", "Vite"] },
+  { category: "Technologies/Frameworks", items: ["GitHub", "React", "Node.js", "Vite", "Mail JS", "Particle JS"] },
   { category: "Computer Engineering", items: ["Data Structures", "Algorithms (DSA)", "Object-Oriented Programming (OOP)"] }
 ];
 

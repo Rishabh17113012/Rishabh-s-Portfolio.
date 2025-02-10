@@ -3,36 +3,36 @@ import { ExternalLink, Github } from "lucide-react";
 
 const projects = [
   {
-    title: "Landing Page",
-    description: "Modern landing page with responsive design",
-    longDescription: "A fully responsive landing page built with React and Tailwind CSS, featuring smooth animations and modern design principles.",
+    title: "ATC Chatbot",
+    description: "Modern chatbot with responsive design and image generation",
+    longDescription: "A fully responsive lchatbor built with React and Tailwind CSS along with Bot feature from BotPress, featuring smooth animations and modern design principles.",
     live: "https://landing-page-topaz-seven-67.vercel.app",
     github: "https://github.com/Rishabh17113012/Landing_page",
-    image: "/project1.jpg"
+    image: "/atc.png"
   },
   {
     title: "Genre - College Magazine Platform",
     description: "Digital magazine platform with genre categorization",
-    longDescription: "Developed a comprehensive platform for the Editorial Board that transforms the college magazine into an accessible e-book format. Features include PDF viewing, easy navigation, and mobile responsiveness. The platform also includes book categorization by genre, making it easy for users to discover and track their reading preferences.",
+    longDescription: "Developed a comprehensive platform for the Editorial Board, that transforms the college magazine into an accessible e-book format. Features include PDF viewing, easy navigation, and mobile responsiveness. The platform also includes book categorization by Magazine from different years, making it easy for users to discover and track their reading preferences.",
     live: "https://genre-tawny.vercel.app",
     github: "https://github.com/Rishabh17113012/BookRead",
-    image: "/project2.jpg"
+    image: "/genre.png"
   },
   {
     title: "Expense Tracker",
     description: "Track and manage your expenses efficiently",
-    longDescription: "A powerful expense tracking application that helps users monitor their spending habits with detailed analytics and budgeting features.",
+    longDescription: "A powerful expense tracking application that helps users monitor their spending habits with detailed analytics and budgeting features along with charting system.",
     live: "https://expense-tracker-app-chi-lyart.vercel.app",
     github: "https://github.com/Rishabh17113012/ExpenseTracker-App",
-    image: "/project3.jpg"
+    image: "/expenseTracker.png"
   },
   {
     title: "To-Do List",
     description: "Simple and effective task management",
-    longDescription: "An intuitive to-do list application with task prioritization, due dates, and progress tracking features.",
+    longDescription: "An intuitive to-do list application with task prioritization, and progress tracking features. Visual Immagery is it's forte",
     live: "https://to-do-list-fawn-six-33.vercel.app",
     github: "https://github.com/Rishabh17113012/To-Do-List",
-    image: "/project4.jpg"
+    image: "/Todo.png"
   },
   {
     title: "Task Manager",
@@ -40,7 +40,7 @@ const projects = [
     longDescription: "A comprehensive task management solution with team collaboration features, deadline tracking, and project organization tools.",
     live: "https://task-manager-cyan-nine.vercel.app",
     github: "https://github.com/Rishabh17113012/Task-Manager",
-    image: "/project5.jpg"
+    image: "/TaskManager.png"
   }
 ];
 
