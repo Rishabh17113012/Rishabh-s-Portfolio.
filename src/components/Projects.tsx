@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 
@@ -12,9 +11,9 @@ const projects = [
     image: "/project1.jpg"
   },
   {
-    title: "Genre",
-    description: "Book reading application with genre categorization",
-    longDescription: "A comprehensive book reading platform that organizes books by genre, making it easy for users to discover and track their reading preferences.",
+    title: "Genre - College Magazine Platform",
+    description: "Digital magazine platform with genre categorization",
+    longDescription: "Developed a comprehensive platform for the Editorial Board that transforms the college magazine into an accessible e-book format. Features include PDF viewing, easy navigation, and mobile responsiveness. The platform also includes book categorization by genre, making it easy for users to discover and track their reading preferences.",
     live: "https://genre-tawny.vercel.app",
     github: "https://github.com/Rishabh17113012/BookRead",
     image: "/project2.jpg"
@@ -42,14 +41,6 @@ const projects = [
     live: "https://task-manager-cyan-nine.vercel.app",
     github: "https://github.com/Rishabh17113012/Task-Manager",
     image: "/project5.jpg"
-  },
-  {
-    title: "College Magazine Platform",
-    description: "Digital platform for college magazine",
-    longDescription: "Developed a web platform for the Editorial Board that transforms the college magazine into an accessible e-book format. Features include PDF viewing, easy navigation, and mobile responsiveness.",
-    live: "#",
-    github: "#",
-    image: "/project6.jpg"
   }
 ];
 
