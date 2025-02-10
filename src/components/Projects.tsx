@@ -6,6 +6,7 @@ const projects = [
   {
     title: "Landing Page",
     description: "Modern landing page with responsive design",
+    longDescription: "A fully responsive landing page built with React and Tailwind CSS, featuring smooth animations and modern design principles.",
     live: "https://landing-page-topaz-seven-67.vercel.app",
     github: "https://github.com/Rishabh17113012/Landing_page",
     image: "/project1.jpg"
@@ -13,6 +14,7 @@ const projects = [
   {
     title: "Genre",
     description: "Book reading application with genre categorization",
+    longDescription: "A comprehensive book reading platform that organizes books by genre, making it easy for users to discover and track their reading preferences.",
     live: "https://genre-tawny.vercel.app",
     github: "https://github.com/Rishabh17113012/BookRead",
     image: "/project2.jpg"
@@ -20,6 +22,7 @@ const projects = [
   {
     title: "Expense Tracker",
     description: "Track and manage your expenses efficiently",
+    longDescription: "A powerful expense tracking application that helps users monitor their spending habits with detailed analytics and budgeting features.",
     live: "https://expense-tracker-app-chi-lyart.vercel.app",
     github: "https://github.com/Rishabh17113012/ExpenseTracker-App",
     image: "/project3.jpg"
@@ -27,6 +30,7 @@ const projects = [
   {
     title: "To-Do List",
     description: "Simple and effective task management",
+    longDescription: "An intuitive to-do list application with task prioritization, due dates, and progress tracking features.",
     live: "https://to-do-list-fawn-six-33.vercel.app",
     github: "https://github.com/Rishabh17113012/To-Do-List",
     image: "/project4.jpg"
@@ -34,9 +38,18 @@ const projects = [
   {
     title: "Task Manager",
     description: "Advanced task management system",
+    longDescription: "A comprehensive task management solution with team collaboration features, deadline tracking, and project organization tools.",
     live: "https://task-manager-cyan-nine.vercel.app",
     github: "https://github.com/Rishabh17113012/Task-Manager",
     image: "/project5.jpg"
+  },
+  {
+    title: "College Magazine Platform",
+    description: "Digital platform for college magazine",
+    longDescription: "Developed a web platform for the Editorial Board that transforms the college magazine into an accessible e-book format. Features include PDF viewing, easy navigation, and mobile responsiveness.",
+    live: "#",
+    github: "#",
+    image: "/project6.jpg"
   }
 ];
 
@@ -82,7 +95,8 @@ const Projects = () => {
                   src={project.image} 
                   alt={project.title} 
                 />
-                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4">
+                  <p className="text-white text-sm mb-4">{project.longDescription}</p>
                   <div className="space-x-4">
                     <a
                       href={project.github}
