@@ -1,5 +1,6 @@
 
 import { motion } from "framer-motion";
+import { Github, Linkedin, Mail } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -10,12 +11,18 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="relative w-32 h-32 mx-auto mb-8"
+            className="relative w-32 h-32 mx-auto mb-8 group"
           >
             <img
               src="/profile.jpg"
               alt="Profile"
-              className="rounded-full object-cover w-full h-full shadow-lg"
+              className="rounded-full object-cover w-full h-full shadow-lg transition-transform duration-300 group-hover:scale-110"
+            />
+            <motion.div
+              className="absolute inset-0 rounded-full bg-purple-600/20 animate-pulse"
+              initial={{ scale: 1.1, opacity: 0 }}
+              animate={{ scale: 1.2, opacity: 0.5 }}
+              transition={{ duration: 1.5, repeat: Infinity }}
             />
           </motion.div>
 
@@ -42,12 +49,42 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
+            className="mt-8 flex justify-center space-x-6"
+          >
+            <a
+              href="https://github.com/Rishabh17113012"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-500 hover:text-gray-900 transition-colors"
+            >
+              <Github className="w-6 h-6" />
+            </a>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-500 hover:text-gray-900 transition-colors"
+            >
+              <Linkedin className="w-6 h-6" />
+            </a>
+            <a
+              href="mailto:your.email@example.com"
+              className="text-gray-500 hover:text-gray-900 transition-colors"
+            >
+              <Mail className="w-6 h-6" />
+            </a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
             className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8"
           >
             <div className="rounded-md shadow">
               <a
                 href="#contact"
-                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 md:py-4 md:text-lg md:px-10 transition-all duration-300"
+                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 md:py-4 md:text-lg md:px-10 transition-all duration-300 hover:scale-105"
               >
                 Get in Touch
               </a>

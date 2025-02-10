@@ -71,35 +71,42 @@ const Projects = () => {
               key={project.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -5 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="flex flex-col overflow-hidden rounded-lg shadow-lg bg-white"
+              className="flex flex-col overflow-hidden rounded-lg shadow-lg bg-white hover:shadow-xl transition-all duration-300"
             >
-              <div className="flex-shrink-0">
-                <img className="h-48 w-full object-cover" src={project.image} alt={project.title} />
+              <div className="flex-shrink-0 relative group">
+                <img 
+                  className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-110" 
+                  src={project.image} 
+                  alt={project.title} 
+                />
+                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <div className="space-x-4">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 transition-colors"
+                    >
+                      <Github className="w-5 h-5 text-white" />
+                    </a>
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 transition-colors"
+                    >
+                      <ExternalLink className="w-5 h-5 text-white" />
+                    </a>
+                  </div>
+                </div>
               </div>
-              <div className="flex-1 p-6 flex flex-col justify-between">
+              <div className="flex-1 p-6 flex flex-col justify-between bg-white">
                 <div className="flex-1">
                   <h3 className="text-xl font-semibold text-gray-900">{project.title}</h3>
                   <p className="mt-3 text-base text-gray-500">{project.description}</p>
-                </div>
-                <div className="mt-6 flex justify-end space-x-4">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-gray-600 transition-colors"
-                  >
-                    <Github size={20} />
-                  </a>
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-gray-600 transition-colors"
-                  >
-                    <ExternalLink size={20} />
-                  </a>
                 </div>
               </div>
             </motion.div>
