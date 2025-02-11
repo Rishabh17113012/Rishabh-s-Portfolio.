@@ -6,25 +6,57 @@ import { Mail, Phone, MapPin, LinkedinIcon, GithubIcon, Instagram } from "lucide
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-
+    setError(false);
+  
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const userEmail = formData.get("email") as string;
+  
+    // Log email for debugging
+    console.log("Extracted email:", userEmail);
+  
+    // Validate email before sending
+    if (!userEmail || userEmail.trim() === "") {
+      console.error("User email is missing or invalid!");
+      setError(true);
+      setIsSubmitting(false);
+      return;
+    }
+  
     try {
+      // Send user message
       await emailjs.sendForm(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        e.currentTarget,
+        form,
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
+  
+      // Send auto-reply
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID,
+        {
+          to_email: userEmail,
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+  
       setSubmitted(true);
     } catch (error) {
       console.error("Error sending email:", error);
+      setError(true);
     } finally {
       setIsSubmitting(false);
     }
   };
+  
+  
 
   return (
     <section id="contact" className="py-20 bg-gray-50">
@@ -45,6 +77,7 @@ const Contact = () => {
         </motion.div>
 
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Contact Info Section */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -87,7 +120,6 @@ const Contact = () => {
                   LinkedIn Profile
                 </a>
               </div>
-
               <div className="flex items-center space-x-3">
                 <GithubIcon className="w-5 h-5 text-purple-600" />
                 <a
@@ -99,7 +131,6 @@ const Contact = () => {
                   GitHub Profile
                 </a>
               </div>
-
               <div className="flex items-center space-x-3">
                 <Instagram className="w-5 h-5 text-purple-600" />
                 <a
@@ -114,6 +145,7 @@ const Contact = () => {
             </div>
           </motion.div>
 
+          {/* Form Section */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -127,7 +159,7 @@ const Contact = () => {
                   Thank you for your message!
                 </h3>
                 <p className="mt-2 text-gray-500">
-                  I'll get back to you as soon as possible.
+                  I'll get back to you as soon as possible. An auto-reply has been sent to your email.
                 </p>
               </div>
             ) : (
@@ -135,45 +167,36 @@ const Contact = () => {
                 onSubmit={handleSubmit}
                 className="bg-white rounded-lg shadow-lg p-8 space-y-6"
               >
+                {error && (
+                  <p className="text-red-500 text-center">Failed to send message. Please try again.</p>
+                )}
                 <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+                  <label className="block text-sm font-medium text-gray-700">
                     Name
                   </label>
                   <input
                     type="text"
                     name="name"
-                    id="name"
                     required
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
                   />
                 </div>
                 <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+                  <label className="block text-sm font-medium text-gray-700">
                     Email
                   </label>
                   <input
                     type="email"
                     name="email"
-                    id="email"
                     required
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
                   />
                 </div>
                 <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+                  <label className="block text-sm font-medium text-gray-700">
                     Message
                   </label>
                   <textarea
-                    id="message"
                     name="message"
                     rows={4}
                     required
@@ -183,7 +206,7 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+                  className="w-full py-3 px-6 text-white bg-purple-600 hover:bg-purple-700 rounded-md disabled:opacity-50"
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </button>
