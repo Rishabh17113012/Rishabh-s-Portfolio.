@@ -162,7 +162,7 @@ const Hero = () => {
                   boxShadow: "0 4px 15px rgba(107, 70, 193, 0.4)"
                 }}
               >
-                Hire Me
+                Get In Touch
               </motion.a>
             </motion.div>
           </motion.div>
