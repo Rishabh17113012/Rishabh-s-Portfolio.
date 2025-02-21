@@ -1,52 +1,76 @@
 import React from 'react';
 import { motion } from "framer-motion";
+import { 
+  SiHtml5, 
+  SiCss3, 
+  SiJavascript, 
+  SiTypescript, 
+  SiMysql, 
+  SiCplusplus, 
+  SiPython, 
+  SiC, 
+  SiPhp, 
+  SiJupyter, 
+  SiGithub, 
+  SiReact, 
+  SiNodedotjs, 
+  SiVite,
+  SiGooglechrome
+} from 'react-icons/si';
+import { Mail, Wrench, Cpu, Zap, Server, Code } from 'lucide-react';
 
-const skills = [
-  { category: "Programming Languages", items: ["HTML", "CSS", "JavaScript", "TypeScript", "SQL", "C++", "Python", "C", "PHP"] },
-  { category: "Developer Tools", items: ["VS Code", "WEKA", "Chrome DevTools", "Jupyter Notebook"] },
-  { category: "Technologies/Frameworks", items: ["GitHub", "React", "Node.js", "Vite", "Mail JS", "Particle JS", "Express JS"] },
-  { category: "Computer Engineering", items: ["Data Structures", "Algorithms (DSA)", "Object-Oriented Programming (OOP)"] }
-];
+// Define a common type that accepts size as either a number or string.
+type IconComponentType = React.ComponentType<{ size?: number | string; className?: string }>;
+
+const skillIconMap: Record<string, IconComponentType> = {
+  "HTML": SiHtml5,
+  "CSS": SiCss3,
+  "JavaScript": SiJavascript,
+  "TypeScript": SiTypescript,
+  "SQL": SiMysql,
+  "C++": SiCplusplus,
+  "Python": SiPython,
+  "C": SiC,
+  "PHP": SiPhp,
+  "VS Code": Code,             
+  "WEKA": Wrench,             
+  "Chrome DevTools": SiGooglechrome, 
+  "Jupyter Notebook": SiJupyter,
+  "GitHub": SiGithub,
+  "React": SiReact,
+  "Node.js": SiNodedotjs,
+  "Vite": SiVite,
+  "Mail JS": Mail,
+  "Particle JS": Zap,
+  "Express JS": Server,
+  "Data Structures": Cpu,
+  "Algorithms (DSA)": Cpu,
+  "Object-Oriented Programming (OOP)": Cpu
+};
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.2
-    }
+    transition: { staggerChildren: 0.2 }
   }
 };
 
 const cardVariants = {
-  hidden: { 
-    opacity: 0,
-    y: 50
-  },
+  hidden: { opacity: 0, y: 50 },
   visible: {
-    opacity: 1,
+    opacity: 1, 
     y: 0,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 12
-    }
+    transition: { type: "spring", stiffness: 100, damping: 12 }
   }
 };
 
 const skillVariants = {
-  hidden: { 
-    opacity: 0,
-    scale: 0.8
-  },
+  hidden: { opacity: 0, scale: 0.8 },
   visible: {
-    opacity: 1,
+    opacity: 1, 
     scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 200,
-      damping: 15
-    }
+    transition: { type: "spring", stiffness: 200, damping: 15 }
   }
 };
 
@@ -57,11 +81,7 @@ const Skills = () => {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ 
-            duration: 0.6,
-            type: "spring",
-            stiffness: 100 
-          }}
+          transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
           viewport={{ once: true }}
           className="text-center"
         >
@@ -78,94 +98,58 @@ const Skills = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {skills.map((skillGroup, groupIndex) => (
+          {[
+            {
+              category: "Programming Languages",
+              items: ["HTML", "CSS", "JavaScript", "TypeScript", "SQL", "C++", "Python", "C", "PHP"]
+            },
+            {
+              category: "Developer Tools",
+              items: ["VS Code", "WEKA", "Chrome DevTools", "Jupyter Notebook"]
+            },
+            {
+              category: "Technologies/Frameworks",
+              items: ["GitHub", "React", "Node.js", "Vite", "Mail JS", "Particle JS", "Express JS"]
+            },
+            {
+              category: "Computer Engineering",
+              items: ["Data Structures", "Algorithms (DSA)", "Object-Oriented Programming (OOP)"]
+            }
+          ].map((skillGroup) => (
             <motion.div
               key={skillGroup.category}
               variants={cardVariants}
-              whileHover={{ 
-                y: -5,
-                transition: {
-                  type: "spring",
-                  stiffness: 400,
-                  damping: 10
-                }
-              }}
-              className="glass-card rounded-lg p-6 hover:shadow-xl transition-all duration-300 backdrop-blur-sm bg-white/80"
+              className="glass-card rounded-lg p-6 transition-all duration-300 backdrop-blur-sm bg-white/80 hover:shadow-xl"
             >
-              <motion.h3 
-                className="text-lg font-semibold text-gray-900 mb-4"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: groupIndex * 0.1 }}
-                viewport={{ once: true }}
-              >
+              <h3 className="text-xl font-semibold text-gray-900 mb-4 text-center">
                 {skillGroup.category}
-              </motion.h3>
+              </h3>
               <motion.div 
-                className="flex flex-wrap gap-2"
+                className="grid grid-cols-3 sm:grid-cols-4 gap-4 justify-items-center"
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
               >
-                {skillGroup.items.map((skill, index) => (
-                  <motion.span
-                    key={skill}
-                    variants={skillVariants}
-                    whileHover={{ 
-                      scale: 1.1,
-                      backgroundColor: "#E9D5FF",
-                      transition: {
-                        type: "spring",
-                        stiffness: 400,
-                        damping: 10
-                      }
-                    }}
-                    className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm transition-all cursor-pointer shadow-sm hover:shadow-md"
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
+                {skillGroup.items.map((skill) => {
+                  const IconComponent = skillIconMap[skill];
+                  return (
+                    <motion.div
+                      key={skill}
+                      variants={skillVariants}
+                      whileHover={{ scale: 1.1, transition: { type: "spring", stiffness: 400, damping: 10 } }}
+                      className="flex flex-col items-center"
+                    >
+                      {IconComponent && (
+                        <IconComponent size={40} className="text-purple-600" />
+                      )}
+                      <span className="mt-1 text-sm text-gray-700 text-center">{skill}</span>
+                    </motion.div>
+                  );
+                })}
               </motion.div>
             </motion.div>
           ))}
-        </motion.div>
-
-        <motion.div
-          variants={cardVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="mt-12 glass-card rounded-lg p-6 hover:shadow-xl transition-all duration-300 backdrop-blur-sm bg-white/80"
-        >
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Leadership Experience</h3>
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ 
-              type: "spring",
-              stiffness: 100,
-              damping: 12,
-              delay: 0.2
-            }}
-            viewport={{ once: true }}
-            className="space-y-4"
-          >
-            <div>
-              <h4 className="font-medium text-gray-900">Team Captain, Zonal Railways Cricket Academy</h4>
-              <motion.p 
-                className="text-gray-600 mt-2 space-y-2"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                viewport={{ once: true }}
-              >
-                <div>• Represented Zonal Railways Cricket Academy as a player and team Captain (2017).</div>
-                <div>• Led the team to success in regional tournaments, fostering teamwork and strategic thinking.</div>
-                <div>• Demonstrated leadership skills by guiding and mentoring teammates and maintaining a positive team atmosphere.</div>
-              </motion.p>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>

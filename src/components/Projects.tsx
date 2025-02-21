@@ -15,7 +15,7 @@ const projects = [
     title: "Genre - College Magazine Platform",
     description: "Digital magazine platform with genre categorization",
     longDescription: "Developed a digital platform for the Editorial Board to transform the college magazine into an accessible e-book. Features include PDF viewing, easy navigation, mobile responsiveness, and magazine categorization by year for seamless discovery and tracking.",
-    live: "https://genre-tawny.vercel.app",
+    live: "https://genre2k25.vercel.app",
     github: "https://github.com/Rishabh17113012/BookRead",
     image: "/genre.png"
   },
@@ -71,6 +71,75 @@ const cardVariants = {
   }
 };
 
+const ProjectCard = ({ project }) => {
+  return (
+    <motion.div
+      variants={cardVariants}
+      whileHover={{ 
+        y: -10,
+        transition: {
+          type: "spring",
+          stiffness: 400,
+          damping: 10
+        }
+      }}
+      className="flex flex-col overflow-hidden rounded-lg shadow-lg bg-white hover:shadow-xl transition-all duration-300"
+    >
+      <div className="flex-shrink-0 relative group">
+        <motion.img 
+          className="h-48 w-full object-cover"
+          src={project.image} 
+          alt={project.title}
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3 }}
+        />
+        <motion.div 
+          className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center p-4"
+          initial={{ opacity: 0 }}
+          whileHover={{ opacity: 1 }}
+          transition={{ duration: 0.2 }}
+        >
+          <p className="text-white text-sm mb-4">{project.longDescription}</p>
+          <div className="space-x-4">
+            <motion.a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/20"
+              whileHover={{ 
+                scale: 1.1,
+                backgroundColor: "rgba(255, 255, 255, 0.4)" 
+              }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
+              <Github className="w-5 h-5 text-white" />
+            </motion.a>
+            <motion.a
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/20"
+              whileHover={{ 
+                scale: 1.1,
+                backgroundColor: "rgba(255, 255, 255, 0.4)" 
+              }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
+              <ExternalLink className="w-5 h-5 text-white" />
+            </motion.a>
+          </div>
+        </motion.div>
+      </div>
+      <div className="flex-1 p-6 flex flex-col justify-between bg-white">
+        <div className="flex-1">
+          <h3 className="text-xl font-semibold text-gray-900">{project.title}</h3>
+          <p className="mt-3 text-base text-gray-500">{project.description}</p>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 const Projects = () => {
   return (
     <section id="projects" className="py-20 bg-gray-50">
@@ -112,72 +181,8 @@ const Projects = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              variants={cardVariants}
-              whileHover={{ 
-                y: -10,
-                transition: {
-                  type: "spring",
-                  stiffness: 400,
-                  damping: 10
-                }
-              }}
-              className="flex flex-col overflow-hidden rounded-lg shadow-lg bg-white hover:shadow-xl transition-all duration-300"
-            >
-              <div className="flex-shrink-0 relative group">
-                <motion.img 
-                  className="h-48 w-full object-cover"
-                  src={project.image} 
-                  alt={project.title}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                />
-                <motion.div 
-                  className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center p-4"
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <p className="text-white text-sm mb-4">{project.longDescription}</p>
-                  <div className="space-x-4">
-                    <motion.a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/20"
-                      whileHover={{ 
-                        scale: 1.1,
-                        backgroundColor: "rgba(255, 255, 255, 0.4)" 
-                      }}
-                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                    >
-                      <Github className="w-5 h-5 text-white" />
-                    </motion.a>
-                    <motion.a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/20"
-                      whileHover={{ 
-                        scale: 1.1,
-                        backgroundColor: "rgba(255, 255, 255, 0.4)" 
-                      }}
-                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                    >
-                      <ExternalLink className="w-5 h-5 text-white" />
-                    </motion.a>
-                  </div>
-                </motion.div>
-              </div>
-              <div className="flex-1 p-6 flex flex-col justify-between bg-white">
-                <div className="flex-1">
-                  <h3 className="text-xl font-semibold text-gray-900">{project.title}</h3>
-                  <p className="mt-3 text-base text-gray-500">{project.description}</p>
-                </div>
-              </div>
-            </motion.div>
+          {projects.map((project) => (
+            <ProjectCard key={project.title} project={project} />
           ))}
         </motion.div>
       </div>
