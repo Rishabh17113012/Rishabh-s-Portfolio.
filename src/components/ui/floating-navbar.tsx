@@ -1,28 +1,56 @@
 "use client";
-import React from "react";
-import { motion } from "motion/react";
+import React, { createContext, useContext, useState } from "react";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+export const NavVisibilityContext = createContext({
+  isNavVisible: true,
+  setNavVisibility: (visible: boolean) => {},
+});
+
+export const NavVisibilityProvider = ({ children }: { children: React.ReactNode }) => {
+  const [isNavVisible, setIsNavVisible] = useState(true);
+  const setNavVisibility = (visible: boolean) => {
+    setIsNavVisible(visible);
+  };
+  return (
+    <NavVisibilityContext.Provider value={{ isNavVisible, setNavVisibility }}>
+      {children}
+    </NavVisibilityContext.Provider>
+  );
+};
+
+export type FloatingNavItem = {
+  name: string;
+  link: string;
+  icon?: JSX.Element;
+  onClick?: () => void;
+};
 
 export const FloatingNav = ({
   navItems,
   className,
 }: {
-  navItems: {
-    name: string;
-    link: string;
-    icon?: JSX.Element;
-  }[];
+  navItems: FloatingNavItem[];
   className?: string;
 }) => {
+  const { isNavVisible } = useContext(NavVisibilityContext);
+  const pathname = usePathname();
+
+  if (pathname === "/resume" && !isNavVisible) {
+    return null;
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
       className={cn(
-        // Adjusted classes for larger size
-        "flex max-w-fit fixed top-4 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-full dark:bg-black bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-[5000] pr-4 pl-12 py-3 items-center justify-center space-x-6",
+        // Updated styling with dark purplish border and hover ring
+        "flex max-w-fit fixed top-4 inset-x-0 mx-auto rounded-xl bg-white/80 dark:bg-black/80 shadow-lg px-6 py-3 items-center justify-center space-x-6 z-[5000] border-2 border-[#4B0082] hover:ring-2 hover:ring-[#4B0082] transition-all duration-300",
         className
       )}
     >
@@ -30,8 +58,14 @@ export const FloatingNav = ({
         <Link
           key={`link=${idx}`}
           href={navItem.link}
+          onClick={(e) => {
+            if (navItem.onClick) {
+              e.preventDefault();
+              navItem.onClick();
+            }
+          }}
           className={cn(
-            "relative dark:text-neutral-50 items-center flex space-x-2 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
+            "relative flex items-center space-x-2 text-neutral-600 dark:text-neutral-50 transition-transform duration-200 hover:scale-105 hover:text-neutral-500 dark:hover:text-neutral-300"
           )}
         >
           <span className="block sm:hidden">{navItem.icon}</span>

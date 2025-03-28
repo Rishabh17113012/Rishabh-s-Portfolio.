@@ -31,7 +31,7 @@ const ParticleBackground = () => {
         interactivity: {
           events: {
             onClick: {
-              enable: true,
+              enable: false, // Disable click events
               mode: "push",
             },
             onHover: {
