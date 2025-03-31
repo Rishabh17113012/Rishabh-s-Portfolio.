@@ -2,6 +2,7 @@ import { useState, FormEvent } from "react";
 import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, LinkedinIcon, GithubIcon, Instagram } from "lucide-react";
+import { BackgroundBeams } from "./ui/background-beams";
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -56,11 +57,10 @@ const Contact = () => {
     }
   };
   
-  
-
   return (
-    <section id="contact" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="relative py-20 bg-gray-50">
+  <BackgroundBeams className="absolute inset-0 z-[-10] opacity-40 pointer-events-none" />
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

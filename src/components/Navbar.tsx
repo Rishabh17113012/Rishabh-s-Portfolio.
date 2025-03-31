@@ -9,6 +9,8 @@ import {
   FileText,
   MessageSquare,
   X,
+  Award,
+  Briefcase,
 } from "lucide-react";
 import ResumePage from "./resume";
 import { HoverBorderGradient } from "../components/ui/hover-border-gradient";
@@ -34,10 +36,20 @@ const Navbar = () => {
       link: "#projects",
       icon: <Folder size={16} className="text-neutral-500" />,
     },
+   // {
+    //  name: "Experience",
+      //link: "#experience",
+      //icon: <Briefcase size={16} className="text-neutral-500" />,
+   // },
     {
       name: "Skills",
       link: "#skills",
       icon: <Star size={16} className="text-neutral-500" />,
+    },
+    {
+      name: "Certifications",
+      link: "#certificate",
+      icon: <Award size={16} className="text-neutral-500" />,
     },
     {
       name: "Testimonials",
@@ -80,7 +92,7 @@ const Navbar = () => {
                 <span>Close</span>
               </HoverBorderGradient>
             </div>
-            {/* Mobile Cross Icon positioned at top-right */}
+            {/* Mobile Close Button */}
             <div className="sm:hidden absolute top-4 right-4">
               <HoverBorderGradient
                 containerClassName="rounded-full"

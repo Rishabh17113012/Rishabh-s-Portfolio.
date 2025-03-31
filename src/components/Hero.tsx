@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from "framer-motion";
 import { Github, LinkedinIcon, Mail, InstagramIcon } from "lucide-react";
+import { BackgroundBeams } from './ui/background-beams';
+import { HeroHighlight, Highlight } from './ui/hero-highlight';
 
 const socialVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -32,6 +34,7 @@ const pulseVariants = {
 const Hero = () => {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      <HeroHighlight>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
         <div className="text-center">
           <motion.div
@@ -79,7 +82,9 @@ const Hero = () => {
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
+              <Highlight className="text-black dark:text-white relative">
               Hi, I'm Rishabh
+              </Highlight>
             </motion.span>
             <motion.span 
               className="block text-purple-600"
@@ -99,7 +104,7 @@ const Hero = () => {
               damping: 15,
               delay: 0.4 
             }}
-            className="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl"
+            className="mt-3 max-w-md mx-auto text-base text-black-800 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl"
           >
             A passionate developer with expertise in full-stack web development, 
             bringing creative ideas to life with modern technologies. Currently pursuing 
@@ -167,7 +172,9 @@ const Hero = () => {
             </motion.div>
           </motion.div>
         </div>
+        <BackgroundBeams/>
       </div>
+      </HeroHighlight>
     </section>
   );
 };
