@@ -4,6 +4,22 @@ import { Timeline } from "./ui/timeline";
 const Certifications = () => {
   const certificationData = [
     {
+      title: "Introduction to Artificial Intelligence (AI)",
+      date: "2025",
+      organization: "Coursera | Offered by IBM",
+      content:
+        "This certification provided a foundational understanding of Artificial Intelligence and its real-world applications across industries. I explored key AI concepts such as machine learning, deep learning, and natural language processing. The course emphasized ethical considerations, AI in business transformation, and practical tools like generative AI and retrieval-augmented generation (RAG). Through hands-on activities and real-world case studies, I developed insights into how AI can automate tasks, enhance decision-making, and drive innovation.",
+      imageUrl: "/CERTIFICATE_LANDING_PAGE~SJF3DYZJ9AHR.jpeg",
+      skills: [
+        "Artificial Intelligence (AI)",
+        "Machine Learning",
+        "Natural Language Processing (NLP)",
+        "Generative AI",
+        "AI Ethics and Governance",
+        "Retrieval-Augmented Generation (RAG)"
+      ],
+    },    
+    {
       title: "Computer Graphics",
       date: "2025",
       organization: "National Programme on Technology Enhanced Learning (NPTEL)",
