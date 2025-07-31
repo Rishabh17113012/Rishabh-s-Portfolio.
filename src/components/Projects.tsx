@@ -5,6 +5,15 @@ import { ExternalLink, Github } from "lucide-react";
 import { BackgroundBeams } from "./ui/background-beams";
 
 const projects = [
+    {
+    title: "The Moronss",
+    description: "Modern chatbot with responsive design and resume generation",
+    longDescription:
+      "A fully responsive chatbot built with React and Tailwind CSS built specially for job guidance and resume enhancements.",
+    live: "https://morons2-0.vercel.app",
+    github: "https://github.com/Rishabh17113012/morons2.0",
+    image: "/moron.png",
+  },
   {
     title: "ATC Chatbot",
     description: "Modern chatbot with responsive design and image generation",
