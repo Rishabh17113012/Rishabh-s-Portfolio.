@@ -3,6 +3,22 @@ import { Timeline } from "./ui/timeline";
 
 const Certifications = () => {
   const certificationData = [
+        {
+      title: "Certificate of Internship Completion",
+      date: "2025",
+      organization: "The Moronss",
+      content:
+        "This internship provided a strong foundation in Full Stack Development and its practical applications in real-world web and software projects. I gained hands-on experience with both frontend and backend technologies, including React, Node.js, Express, MongoDB, and RESTful APIs. The program emphasized clean code practices, responsive design, and effective database management. I also explored deployment, version control with Git, and collaborative development workflows. Through real-world projects and team-based tasks, I developed a deeper understanding of how full stack solutions are built to solve complex problems, improve user experience, and drive digital innovation.",
+      imageUrl: "/moronss.png",
+      skills: [
+        "React",
+        "Node JS",
+        "Natural Language Processing (NLP)",
+        "Mongo DB",
+        "Express",
+        "REST-ful APIs"
+      ],
+    }, 
     {
       title: "Introduction to Artificial Intelligence (AI)",
       date: "2025",

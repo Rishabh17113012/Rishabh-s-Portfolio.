@@ -18,10 +18,36 @@ const Contact = () => {
     const formData = new FormData(form);
     const userEmail = formData.get("email") as string;
   
-    // Log email for debugging
-    console.log("Extracted email:", userEmail);
+    // Get environment variables
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const autoReplyTemplateId = import.meta.env.VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    // Debug: Log environment variables
+    console.log("EmailJS Configuration Check:");
+    console.log("Service ID:", serviceId || "❌ MISSING");
+    console.log("Template ID:", templateId || "❌ MISSING");
+    console.log("AutoReply Template ID:", autoReplyTemplateId || "⚠️ Optional");
+    console.log("Public Key:", publicKey ? "✅ Present" : "❌ MISSING");
+    console.log("User Email:", userEmail);
   
-    // Validate email before sending
+    // Validate environment variables
+    if (!serviceId || !templateId || !publicKey) {
+      console.error("❌ EmailJS configuration is incomplete!");
+      console.error("Missing variables:");
+      if (!serviceId) console.error("  - VITE_EMAILJS_SERVICE_ID");
+      if (!templateId) console.error("  - VITE_EMAILJS_TEMPLATE_ID");
+      if (!publicKey) console.error("  - VITE_EMAILJS_PUBLIC_KEY");
+      console.error("\nMake sure your .env file contains all required variables and restart your dev server.");
+      
+      alert("Email configuration error. Please check the console for details.");
+      setError(true);
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Validate email
     if (!userEmail || userEmail.trim() === "") {
       console.error("User email is missing or invalid!");
       setError(true);
@@ -30,27 +56,38 @@ const Contact = () => {
     }
   
     try {
+      console.log("📤 Sending user message...");
+      
       // Send user message
       await emailjs.sendForm(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        serviceId,
+        templateId,
         form,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        publicKey
       );
+      
+      console.log("✅ User message sent successfully!");
   
-      // Send auto-reply
-      await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID,
-        {
-          to_email: userEmail,
-        },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-      );
+      // Send auto-reply (only if template ID exists)
+      if (autoReplyTemplateId) {
+        console.log("📤 Sending auto-reply...");
+        await emailjs.send(
+          serviceId,
+          autoReplyTemplateId,
+          {
+            to_email: userEmail,
+          },
+          publicKey
+        );
+        console.log("✅ Auto-reply sent successfully!");
+      } else {
+        console.log("⚠️ Auto-reply skipped (no template ID configured)");
+      }
   
       setSubmitted(true);
+      form.reset();
     } catch (error) {
-      console.error("Error sending email:", error);
+      console.error("❌ Error sending email:", error);
       setError(true);
     } finally {
       setIsSubmitting(false);
@@ -59,8 +96,8 @@ const Contact = () => {
   
   return (
     <section id="contact" className="relative py-20 bg-gray-50">
-  <BackgroundBeams className="absolute inset-0 z-[-10] opacity-40 pointer-events-none" />
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <BackgroundBeams className="absolute inset-0 z-[-10] opacity-40 pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -99,7 +136,7 @@ const Contact = () => {
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-purple-600" />
                 <a
-                  href="tel:+91 9559440334"
+                  href="tel:+919559440334"
                   className="text-gray-600 hover:text-purple-600"
                 >
                   +91 9559440334
@@ -159,8 +196,16 @@ const Contact = () => {
                   Thank you for your message!
                 </h3>
                 <p className="mt-2 text-gray-500">
-                  I'll get back to you as soon as possible. An auto-reply has been sent to your email.
+                  I'll get back to you as soon as possible.
+                  {import.meta.env.VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID && 
+                    " Thank You"}
                 </p>
+                <button
+                  onClick={() => setSubmitted(false)}
+                  className="mt-4 text-purple-600 hover:text-purple-700 font-medium"
+                >
+                  Send another message
+                </button>
               </div>
             ) : (
               <form
@@ -168,45 +213,51 @@ const Contact = () => {
                 className="bg-white rounded-lg shadow-lg p-8 space-y-6"
               >
                 {error && (
-                  <p className="text-red-500 text-center">Failed to send message. Please try again.</p>
+                  <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+                    <p className="font-medium">Failed to send message</p>
+                    <p className="text-sm">Please check the console for details or try again later.</p>
+                  </div>
                 )}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                     Name
                   </label>
                   <input
                     type="text"
+                    id="name"
                     name="name"
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
+                    className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                     Email
                   </label>
                   <input
                     type="email"
+                    id="email"
                     name="email"
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
+                    className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700">
                     Message
                   </label>
                   <textarea
+                    id="message"
                     name="message"
                     rows={4}
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
+                    className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500"
                   />
                 </div>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3 px-6 text-white bg-purple-600 hover:bg-purple-700 rounded-md disabled:opacity-50"
+                  className="w-full py-3 px-6 text-white bg-purple-600 hover:bg-purple-700 rounded-md font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </button>

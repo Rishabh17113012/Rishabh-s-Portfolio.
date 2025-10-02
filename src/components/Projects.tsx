@@ -1,11 +1,11 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import { BackgroundBeams } from "./ui/background-beams";
 
 const projects = [
-    {
+  {
     title: "The Moronss",
     description: "Modern chatbot with responsive design and resume generation",
     longDescription:
@@ -13,6 +13,15 @@ const projects = [
     live: "https://morons2-0.vercel.app",
     github: "https://github.com/Rishabh17113012/morons2.0",
     image: "/moron.png",
+  },
+  {
+    title: "ATC Conference App",
+    description: "Seamless video conferencing with modern UI",
+    longDescription:
+      "A full-featured video conferencing application built with Next.js, TypeScript, and ReactJS. It provides a smooth, secure, and responsive experience with features like real-time communication, modern UI components, and reliable performance.",
+    live: "https://atc-conference-app.vercel.app",
+    github: "https://github.com/Rishabh17113012/ATC-Conference-App",
+    image: "/atc_conference.png",
   },
   {
     title: "ATC Chatbot",
@@ -85,6 +94,12 @@ const cardVariants = {
 };
 
 const ProjectCard = ({ project }) => {
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
+
+  const handleImageClick = () => {
+    setIsOverlayVisible(!isOverlayVisible);
+  };
+
   return (
     <motion.div
       variants={cardVariants}
@@ -100,19 +115,22 @@ const ProjectCard = ({ project }) => {
     >
       <div className="flex-shrink-0 relative group">
         <motion.img
-          className="h-48 w-full object-cover"
+          className="h-48 w-full object-cover cursor-pointer"
           src={project.image}
           alt={project.title}
+          onClick={handleImageClick}
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.3 }}
         />
         <motion.div
           className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center p-4"
           initial={{ opacity: 0 }}
+          animate={{ opacity: isOverlayVisible ? 1 : 0 }}
           whileHover={{ opacity: 1 }}
           transition={{ duration: 0.2 }}
+          style={{ pointerEvents: isOverlayVisible ? 'auto' : 'none' }}
         >
-          <p className="text-white text-sm mb-4">{project.longDescription}</p>
+          <p className="text-white text-sm mb-4 text-center">{project.longDescription}</p>
           <div className="space-x-4">
             <motion.a
               href={project.github}
@@ -122,6 +140,9 @@ const ProjectCard = ({ project }) => {
               whileHover={{
                 scale: 1.1,
                 backgroundColor: "rgba(255, 255, 255, 0.4)",
+              }}
+              whileTap={{
+                scale: 0.95,
               }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
@@ -136,6 +157,9 @@ const ProjectCard = ({ project }) => {
                 scale: 1.1,
                 backgroundColor: "rgba(255, 255, 255, 0.4)",
               }}
+              whileTap={{
+                scale: 0.95,
+              }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
               <ExternalLink className="w-5 h-5 text-white" />
@@ -148,9 +172,7 @@ const ProjectCard = ({ project }) => {
           <h3 className="text-xl font-semibold text-gray-900">
             {project.title}
           </h3>
-          <p className="mt-3 text-base text-gray-500">
-            {project.description}
-          </p>
+          <p className="mt-3 text-base text-gray-500">{project.description}</p>
         </div>
       </div>
     </motion.div>
@@ -159,7 +181,10 @@ const ProjectCard = ({ project }) => {
 
 const Projects = () => {
   return (
-    <section id="projects" className="relative py-20 bg-gray-50 z-10 overflow-hidden">
+    <section
+      id="projects"
+      className="relative py-20 bg-gray-50 z-10 overflow-hidden"
+    >
       <BackgroundBeams className="absolute inset-0 z-" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">

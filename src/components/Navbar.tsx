@@ -36,11 +36,11 @@ const Navbar = () => {
       link: "#projects",
       icon: <Folder size={16} className="text-neutral-500" />,
     },
-   // {
-    //  name: "Experience",
-      //link: "#experience",
-      //icon: <Briefcase size={16} className="text-neutral-500" />,
-   // },
+   {
+     name: "Experience",
+      link: "#experience",
+      icon: <Briefcase size={16} className="text-neutral-500" />,
+   },
     {
       name: "Skills",
       link: "#skills",
